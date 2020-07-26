@@ -1,0 +1,16 @@
+{
+  "extends": "stylelint-config-recommended",
+  "plugins": ["stylelint-selector-bem-pattern", "stylelint-order"],
+  "rules": {
+    "at-rule-empty-line-before": null,
+    "block-no-empty": null,
+    "color-no-invalid-hex": true,
+    "declaration-colon-space-after": "never",
+    "declaration-block-trailing-semicolon": "never",
+    "indentation": null,
+    "max-empty-lines": 2,
+    "no-extra-semicolons": true,
+    "no-empty-source": null,
+    "unit-whitelist": ["%", "s", "px", "deg"]
+  }
+}

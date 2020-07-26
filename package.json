@@ -1,0 +1,72 @@
+{
+  "name": "vue-cli-torrent",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:debug": "vue-cli-service build --mode debug",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "axios": "^0.18.1",
+    "cube-ui": "^1.12.6",
+    "decimal.js": "^10.0.2",
+    "fastclick": "^1.0.6",
+    "nprogress": "^0.2.0",
+    "ua-parser-js": "^0.7.19",
+    "vue": "^2.5.21",
+    "vue-lazyload": "^1.2.6",
+    "vue-meta": "^1.5.8",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.1",
+    "@vue/cli-service": "^3.2.0",
+    "@vue/eslint-config-standard": "^3.0.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "happypack": "^5.0.0",
+    "postcss-import": "^12.0.1",
+    "postcss-pxtorem": "^4.0.1",
+    "postcss-url": "^8.0.0",
+    "stylelint": "^9.9.0",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-order": "^2.0.0",
+    "stylelint-selector-bem-pattern": "^2.0.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "terser-webpack-plugin": "^2.2.1",
+    "vconsole": "^3.2.0",
+    "vue-template-compiler": "^2.5.21",
+    "webpack-bundle-analyzer": "^3.5.2",
+    "webpack-deep-scope-plugin": "^1.6.0",
+    "webpack-post-compile-plugin": "^1.0.0",
+    "webpack-transform-modules-plugin": "^0.4.3"
+  },
+  "lint-staged": {
+    "**/**.{js,json,pcss,md,vue}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.styl": [
+      "stylelint --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit-msg && lint-staged"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
