@@ -1,15 +1,23 @@
 <template>
-  <div class="xtds-case-rise">
-    <div class="wrap">
-      <case-info class="swipe" :xtdsCase="this.caseData.zhongyaoData" :isRise="false">
-        <div class="tencentPic" slot="pic"></div>
-      </case-info>
-      <case-info class="swipe"  :xtdsCase="this.caseData.tiejianData" :isRise="false">
-        <div class="meituanPic" slot="pic"></div>
-      </case-info>
-      <case-info class="swipe"  :xtdsCase="this.caseData.longguangData" :isRise="false">
-        <div class="xiaomiPic" slot="pic"></div>
-      </case-info>
+  <div class="xtds-case-fall">
+    <div class="xtds-case-fall-wrap">
+      <cube-slide :auto-play="false" :loop="false" ref="slide">
+        <cube-slide-item>
+          <case-info class="case-swipe" :xtdsCase="this.caseData.zhongyaoData" :isRise="false" slot="default">
+            <div class="zhongyaoPic" slot="pic"></div>
+          </case-info>
+        </cube-slide-item>
+        <cube-slide-item>
+          <case-info class="case-swipe"  :xtdsCase="this.caseData.tiejianData" :isRise="false" slot="default">
+            <div class="tiejianPic" slot="pic"></div>
+          </case-info>
+        </cube-slide-item>
+        <cube-slide-item>
+          <case-info class="case-swipe"  :xtdsCase="this.caseData.longguangData" :isRise="false" slot="default">
+            <div class="longguangPic" slot="pic"></div>
+          </case-info>
+        </cube-slide-item>
+      </cube-slide>
     </div>
   </div>
 </template>
@@ -19,7 +27,7 @@ import CaseInfo from '../CaseInfo'
 import { CASE_DATA } from './config.js'
 
 export default {
-  name: 'XingtaidashiRise',
+  name: 'XingtaidashiFall',
   data() {
     return {
       caseData: CASE_DATA
@@ -39,45 +47,21 @@ export default {
 <style scoped lang="stylus">
 @import '~assets/stylus/mixin'
 
-  .xtds-case-rise
+  .xtds-case-fall
     position relative
     padding-top 40px
     overflow hidden
 
-    & .riseBtn
-      position absolute
-      top -85px
-      z-index 2
-      width: 388px;
-      height: 85px;
-      background: linear-gradient(87deg, #f3c946 0%, #ffe155 100%);
-      box-shadow: inset -3px 3px 0px 0px rgba(255, 255, 255, 0.4);
-      border-radius 26px 30px 0 0/26px 26px
-      border-right rotate(30deg)
-      &:after //斜边实现
-        content: ''
-        position absolute
-        z-index 1
-        bottom 0
-        right -23px
-        border-style solid
-        border-width 69px 26px
-        border-color transparent transparent #ffe155 transparent
+    &-wrap
+      width 100%
 
-    & .wrap
-      display flex
-      width 300%
-      clearfix()
+      & .case-swipe
+        width 620px
 
-      & .swipe
-        width 33%
-        float left
-        padding 0 40px
-
-    & .tencentPic
+    & .zhongyaoPic
       bg-image('zhongyao')
-    & .meituanPic
+    & .tiejianPic
       bg-image('tiejian')
-    & .xiaomiPic
+    & .longguangPic
       bg-image('longguang')
 </style>

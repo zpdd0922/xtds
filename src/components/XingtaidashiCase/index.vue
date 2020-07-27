@@ -6,8 +6,8 @@
       <div class="riseBtn" v-show="this.isRise">看涨形态</div>
       <div class="fallBtn" v-show="!this.isRise">看跌形态</div>
     </div>
-    <xingtaidashi-rise v-show="this.isRise"></xingtaidashi-rise>
-    <xingtaidashi-fall v-show="!this.isRise"></xingtaidashi-fall>
+    <xingtaidashi-rise v-if="this.isRise"></xingtaidashi-rise>
+    <xingtaidashi-fall v-if="!this.isRise"></xingtaidashi-fall>
   </div>
 </template>
 
