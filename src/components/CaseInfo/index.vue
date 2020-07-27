@@ -3,29 +3,27 @@
     <div class="company">
       <h3>{{xtdsCase.companyName}}</h3>
       <div class="status">{{xtdsCase.status}}</div>
-      <p>{{xtdsCase.statusDetail}}</p>
+      <p class="statusbox">{{xtdsCase.statusDetail}}</p>
     </div>
     <div class="info">
       <div class="container">
-        <p class="number">{{xtdsCase.highestNum}}</p>
-        <p>{{xtdsCase.highest}}</p>
-        <div class="questionmark"></div>
+        <p :class='classObject'>{{xtdsCase.highestNum}}</p>
+        <p>累计最高{{trend}}幅 <span class="questionmark" @click="popOut"></span></p>
       </div>
       <div class="container r2l">
         <p>出现形态日期</p>
         <p>{{xtdsCase.dateDetail}}</p>
       </div>
       <div class="container">
-        <p class="number">{{xtdsCase.expectationNum}}</p>
-        <p>{{xtdsCase.expectation}}</p>
-        <div class="questionmark"></div>
+        <p :class="classObject">{{xtdsCase.expectationNum}}</p>
+        <p>形态预期{{trend}}幅 <span class="questionmark" @click='popOut'></span></p>
       </div>
       <div class="container r2l">
         <p>当天收市价格</p>
         <p>{{xtdsCase.closePrice}}</p>
       </div>
     </div>
-    <div id="pic"></div>
+    <slot name="pic"></slot>
   </div>
 </template>
 
@@ -34,47 +32,57 @@ export default {
   name: 'CaseInfo',
   data() {
     return {
-      xtdsCase: {
-        companyName: '腾讯控股',
-        status: '钻石底',
-        statusDetail: '钻石底是看涨信号，通常预示着下跌趋势调整接近尾声。',
-        highest: '累计最高涨幅',
-        highestNum: '+31.1%',
-        expectation: '形态预期涨幅',
-        expectationNum: '+13.5%',
-        dateDetail: '2019年12月10日',
-        closePrice: '335.6',
-        picName: 'tencent'
-      }
+      classObject: {
+        number: true,
+        rise: this.isRise,
+        fall: !this.isRise
+      },
+      trend: '涨',
+      isPop: false
     }
   },
-  components: {},
-  watch: {},
-  mounted() {
-    this.showBackgroundImage()
+  props: {
+    xtdsCase: {
+      type: Object
+    },
+    isRise: {
+      type: Boolean,
+      default: true
+    }
+  },
+  created() {
+    if (!this.isRise) {
+      this.trend = '跌'
+    }
   },
   methods: {
-    showBackgroundImage() {
-      let ratio = window.devicePixelRatio
-      let pic = document.getElementById('pic')
-      pic.innerHTML = '123'
-      if (ratio === 3) {
-        pic.style.backgroundImage = `../../views/xingtaidashi/images/${this.xtdsCase.picName}@3x.png`
-      } else {
-        pic.style.backgroundImage = `../../views/xingtaidashi/images/${this.xtdsCase.picName}@2x.png`
-      }
+    popOut() {
+      this.isPop = true
+    },
+    popIn() {
+      this.isPop = false
+    },
+    preventDefault(e) {
+      e.preventDefault()
     }
   }
 }
 </script>
 
 <style scoped lang="stylus">
+@import '~assets/stylus/mixin'
+
   .caseinfo-wrap
     & p
       font-size 24px
-      line-height 30px
+      line-height 24px
       margin-top 14px
       color #666
+
+      & span
+        display inline-block
+        bg-image('question')
+        vertical-align top
 
     & .company
       margin-bottom 24px
@@ -89,10 +97,13 @@ export default {
       & .status
         display inline-block
         margin-left 14px
-        padding 5px 10px 5px
+        padding 7px 10px 5px
         color #fff
         border-radius 16px 16px 16px 0
         background-color #f8a55b
+
+      & .statusbox
+        height 50px
 
     & .info
       display flex
@@ -107,10 +118,56 @@ export default {
           font-size 46px
           line-height 46px
           font-weight bold
+        & .rise
           color #ec7343
+        & .fall
+          color #51ad6b
+
+        & .questionmark
+          bg-image('question')
 
       & .r2l
         padding-top 16px
         text-align right
 
+    & .popout-wrap
+      position fixed
+      left 0
+      top 0
+      bottom 0
+      right 0
+      background-color rgba(0,0,0,0.5)
+      z-index 1000
+
+      & .box
+        position fixed
+        left 50%
+        top 50%
+        width 620px
+        height 403px
+        transform translate(-50%, -50%)
+        border-radius 10px
+        overflow hidden
+
+        & .explaination
+          padding 49px 49px 9px 49px
+          background-color #fff
+          & h4
+            font-size 30px
+            line-hight 30px
+            color #333
+          & p
+            margin 19px 0px 49px 0px
+            font-size 26px
+            line-height 26px
+            color #666
+
+        & .known
+          height 100px
+          font-size 32px
+          line-height 100px
+          text-align center
+          color #fff
+          letter-spacing 2px
+          background-color #3e5ffd
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class='xdts'>
+  <div class='xdts' ref='xtds'>
     <div class="xtds-top">
       <div class="xtds-top-logo"></div>
       <div class="xtds-top-head"></div>
@@ -82,6 +82,17 @@
       </xingtaidashi-card>
       <div class="disclaimer">{{disclaimer}}</div>
       <div class="btn">限时免费开放体验</div>
+    </div>
+    <div class="popout-wrap" v-if="isPop" ref='box'>
+      <div class="box">
+        <div class="explaination">
+          <h4>累计最高涨跌幅</h4>
+          <p>指下一个形态出现之前的最高涨跌幅。</p>
+          <h4>形态预期涨跌幅</h4>
+          <p>指当前形态目标价的涨跌幅。</p>
+        </div>
+        <div class="known" @click='popIn'>我知道了</div>
+      </div>
     </div>
   </div>
 </template>
@@ -270,26 +281,6 @@ export default {
       margin 0 auto 38px
       bg-image('xtdscase')
     }
-    .test {
-      position relative
-      z-index 2
-      width: 388px;
-      height: 85px;
-      background: linear-gradient(87deg, #f3c946 0%, #ffe155 100%);
-      box-shadow: inset -3px 3px 0px 0px rgba(255, 255, 255, 0.4);
-      border-radius 26px 30px 0 0/26px 26px
-      border-right rotate(30deg)
-      &:after {//斜边实现
-        content: ' '
-        position absolute
-        z-index 1
-        bottom 0
-        right -23px
-        border-style solid
-        border-width 69px 26px
-        border-color transparent transparent #ffe155 transparent
-      }
-    }
   }
 
   &-use {
@@ -390,7 +381,7 @@ export default {
             bottom -9px
             content ''
             display block
-            triangle(10px, #4c67eb, right)  
+            triangle(10px, #4c67eb, right)
           }
         }
       }
