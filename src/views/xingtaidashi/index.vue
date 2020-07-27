@@ -83,7 +83,7 @@
       <div class="disclaimer">{{disclaimer}}</div>
       <div class="btn">限时免费开放体验</div>
     </div>
-    <div class="popout-wrap" v-if="isPop" ref='box'>
+    <div class="popout-wrap" v-if="isPop">
       <div class="box">
         <div class="explaination">
           <h4>累计最高涨跌幅</h4>
@@ -110,6 +110,11 @@ export default {
       dataUse: DATA_USE,
       dataQuestion: DATA_QUESTION,
       disclaimer: DISCLAIMER
+    }
+  },
+  computed: {
+    isPop() {
+      return this.$store.state.isPop
     }
   },
   components: {
@@ -408,4 +413,46 @@ export default {
     color #925c0e
   }
 }
+
+.xtds
+  & .popout-wrap
+    position fixed
+    left 0
+    top 0
+    bottom 0
+    right 0
+    background-color rgba(0,0,0,0.5)
+    z-index 1000
+
+    & .box
+      position fixed
+      left 50%
+      top 50%
+      width 620px
+      height 403px
+      transform translate(-50%, -50%)
+      border-radius 10px
+      overflow hidden
+
+      & .explaination
+        padding 49px 49px 9px 49px
+        background-color #fff
+        & h4
+          font-size 30px
+          line-hight 30px
+          color #333
+        & p
+          margin 19px 0px 49px 0px
+          font-size 26px
+          line-height 26px
+          color #666
+
+      & .known
+        height 100px
+        font-size 32px
+        line-height 100px
+        text-align center
+        color #fff
+        letter-spacing 2px
+        background-color #3e5ffd
 </style>

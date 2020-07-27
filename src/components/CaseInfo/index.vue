@@ -37,8 +37,12 @@ export default {
         rise: this.isRise,
         fall: !this.isRise
       },
-      trend: '涨',
-      isPop: false
+      trend: '涨'
+    }
+  },
+  computed: {
+    isPop() {
+      return this.$store.state.isPop
     }
   },
   props: {
@@ -57,13 +61,8 @@ export default {
   },
   methods: {
     popOut() {
-      this.isPop = true
-    },
-    popIn() {
-      this.isPop = false
-    },
-    preventDefault(e) {
-      e.preventDefault()
+      console.log(this.isPop)
+      this.$store.commit('changePop')
     }
   }
 }
@@ -130,44 +129,4 @@ export default {
         padding-top 16px
         text-align right
 
-    & .popout-wrap
-      position fixed
-      left 0
-      top 0
-      bottom 0
-      right 0
-      background-color rgba(0,0,0,0.5)
-      z-index 1000
-
-      & .box
-        position fixed
-        left 50%
-        top 50%
-        width 620px
-        height 403px
-        transform translate(-50%, -50%)
-        border-radius 10px
-        overflow hidden
-
-        & .explaination
-          padding 49px 49px 9px 49px
-          background-color #fff
-          & h4
-            font-size 30px
-            line-hight 30px
-            color #333
-          & p
-            margin 19px 0px 49px 0px
-            font-size 26px
-            line-height 26px
-            color #666
-
-        & .known
-          height 100px
-          font-size 32px
-          line-height 100px
-          text-align center
-          color #fff
-          letter-spacing 2px
-          background-color #3e5ffd
 </style>

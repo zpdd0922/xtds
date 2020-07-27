@@ -1,8 +1,8 @@
 <template>
   <div class="xtds-case-wrap">
     <div class="xtds-case-switch">
-      <span>看涨形态</span>
-      <span>看跌形态</span>
+      <span @click="toggle">看涨形态</span>
+      <span @click="toggle">看跌形态</span>
       <div class="riseBtn" v-show="this.isRise">看涨形态</div>
       <div class="fallBtn" v-show="!this.isRise">看跌形态</div>
     </div>
@@ -26,16 +26,9 @@ export default {
     XingtaidashiRise,
     XingtaidashiFall
   },
-  mounted() {
-    let caseBtn = document.getElementsByClassName('xtds-case-switch')[0]
-    caseBtn.addEventListener('click', this.toggle)
-  },
   methods: {
     toggle(e) {
-      let el = e.target
-      if (el.nodeName === 'SPAN') {
-        this.isRise = !this.isRise
-      }
+      this.isRise = !this.isRise
     }
   }
 }
