@@ -1,15 +1,26 @@
 <template>
   <div class="xtds-case-rise">
-    <div class="wrap">
-      <case-info class="swipe" :xtdsCase="this.caseData.tencentData">
-        <div class="tencentPic" slot="pic"></div>
-      </case-info>
-      <case-info class="swipe"  :xtdsCase="this.caseData.meituanData">
-        <div class="meituanPic" slot="pic"></div>
-      </case-info>
-      <case-info class="swipe"  :xtdsCase="this.caseData.xiaomiData">
-        <div class="xiaomiPic" slot="pic"></div>
-      </case-info>
+    <div class="xtds-case-rise-wrap">
+      <cube-slide :auto-play="false" :loop="false" ref="slide">
+        <cube-slide-item>
+          <case-info class="case-swipe" :xtdsCase="this.caseData.tencentData" slot="default">
+            <div class="tencentPic" slot="pic"></div>
+          </case-info>
+        </cube-slide-item>
+        <cube-slide-item>
+          <case-info class="case-swipe"  :xtdsCase="this.caseData.meituanData" slot="default">
+            <div class="meituanPic" slot="pic"></div>
+          </case-info>
+        </cube-slide-item>
+        <cube-slide-item>
+          <case-info class="case-swipe"  :xtdsCase="this.caseData.xiaomiData" slot="default">
+            <div class="xiaomiPic" slot="pic"></div>
+          </case-info>
+        </cube-slide-item>
+        <template slot="dots" slot-scope="props">
+          <span class="my-dot" :class="{ active: props.current === index}" v-for="(item, index) in props.dots" :key="index">{{index + 1}}</span>
+        </template>
+      </cube-slide>
     </div>
   </div>
 </template>
@@ -64,20 +75,19 @@ export default {
         border-width 69px 26px
         border-color transparent transparent #ffe155 transparent
 
-    & .wrap
-      display flex
-      width 300%
-      clearfix()
+    &-wrap
+      width 100%
 
-      & .swipe
-        width 33%
-        float left
-        padding 0 40px
-
+      & .case-swipe
+        width 620px
+        // float left
+        
     & .tencentPic
       bg-image('tencent')
     & .meituanPic
       bg-image('meituan')
     & .xiaomiPic
       bg-image('xiaomi')
+  // #my-dot
+  //   background-color #d7d7d7
 </style>

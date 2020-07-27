@@ -72,10 +72,11 @@ export default {
 @import '~assets/stylus/mixin'
 
   .caseinfo-wrap
+    padding 0px 40px 72px
     & p
       font-size 24px
-      line-height 24px
-      margin-top 14px
+      line-height 34px
+      margin-top 10px
       color #666
 
       & span
@@ -84,7 +85,7 @@ export default {
         vertical-align top
 
     & .company
-      margin-bottom 24px
+      margin-bottom 34px
       & h3
         display inline-block
         font-size 34px
@@ -103,6 +104,8 @@ export default {
 
       & .statusbox
         height 50px
+        margin-top 20px
+        white-space normal
 
     & .info
       display flex
