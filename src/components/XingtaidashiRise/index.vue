@@ -65,7 +65,7 @@ export default {
           border-radius 50%
           margin 0px 5px
           background-color #d7d7d7
-        
+
         & .active
           background-color #4c67eb
 
