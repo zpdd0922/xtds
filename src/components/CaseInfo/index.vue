@@ -79,9 +79,10 @@ export default {
       color #666
 
       & span
+        position relative
+        top 2px
         display inline-block
         bg-image('question')
-        vertical-align top
 
     & .company
       margin-bottom 34px

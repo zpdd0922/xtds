@@ -107,7 +107,7 @@ import { DATA_USE, DATA_QUESTION, DISCLAIMER } from './config'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: '',
+  name: 'Xingtaidashi',
   data() {
     return {
       dataUse: DATA_USE,
@@ -127,6 +127,7 @@ export default {
     popIn() {
       this.$store.commit('changePop')
     },
+    // 禁止弹窗遮罩底部滚动
     touchForbidden(e) {
       e.preventDefault()
     }
@@ -428,7 +429,8 @@ export default {
     height 100vh
 
     & .xtdscasepop-enter-active, .xtdscasepop-leave-active
-      transition opacity .3s
+      transition opacity 0.2s
+
     & .xtdscasepop-enter, .xtdscasepop-leave-to
       opacity 0
 

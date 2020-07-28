@@ -1,3 +1,4 @@
+// 点击小圆点弹出框的状态控制
 const state = {
   isPop: false
 }

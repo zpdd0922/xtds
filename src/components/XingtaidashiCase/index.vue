@@ -27,7 +27,7 @@ export default {
     XingtaidashiFall
   },
   methods: {
-    toggle(e) {
+    toggle() {
       this.isRise = !this.isRise
     }
   }

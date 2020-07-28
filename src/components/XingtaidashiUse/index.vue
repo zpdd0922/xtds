@@ -1,5 +1,5 @@
 <template>
-  <div class="use-wrap" key="randomKey">
+  <div class="use-wrap">
     <h3 v-if='isHead'>{{dataUse.head}}</h3>
     <p v-html="dataUse.content"></p>
     <div class="use-figure">
@@ -14,13 +14,6 @@ export default {
   name: 'XingtaidashiUse',
   data() {
     return {
-      toggleHead: this.isHead || true,
-      randomKey: Math.random()
-    }
-  },
-  watch: {
-    toggleHead() {
-      this.randomKey = Math.random()
     }
   },
   props: {
