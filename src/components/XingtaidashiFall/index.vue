@@ -1,7 +1,7 @@
 <template>
   <div class="xtds-case-fall">
     <div class="xtds-case-fall-wrap">
-      <cube-slide :auto-play="false" :loop="false" ref="slide">
+      <cube-slide :auto-play="false" :loop="false" ref="slide" :allow-vertical="true">
         <cube-slide-item>
           <case-info class="case-swipe" :xtdsCase="this.caseData.zhongyaoData" :isRise="false" slot="default">
             <div class="zhongyaoPic" slot="pic"></div>
@@ -18,7 +18,7 @@
           </case-info>
         </cube-slide-item>
         <template slot="dots" slot-scope="props">
-          <span class="my-dot" :class="{ active: props.current === index}" v-for="(item, index) in props.dots" :key="index">{{index + 1}}</span>
+          <span class="my-dot" :class="{ active: props.current === index}" v-for="(item, index) in props.dots" :key="index">{{}}</span>
         </template>
       </cube-slide>
     </div>
@@ -38,11 +38,6 @@ export default {
   },
   components: {
     CaseInfo
-  },
-  watch: {},
-  mounted() {},
-  methods: {
-
   }
 }
 </script>

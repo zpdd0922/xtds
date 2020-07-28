@@ -10,7 +10,6 @@ export default {
   name: 'XingtaidashiCard',
   data() {
     return {
-      imageName: 'xtdsheadbg'
     }
   }
 }
@@ -18,7 +17,6 @@ export default {
 
 <style scoped lang='stylus'>
 @import '~assets/stylus/mixin'
-@import '~assets/stylus/variable'
 
 .xtds-card-wrap {
   margin 0 26px 60px

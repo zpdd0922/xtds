@@ -1,5 +1,9 @@
 const state = {
-  isPop: true
+  isPop: false
+}
+
+const getters = {
+  isPop: state => state.isPop
 }
 
 const mutations = {
@@ -10,5 +14,6 @@ const mutations = {
 
 export default {
   state,
+  getters,
   mutations
 }

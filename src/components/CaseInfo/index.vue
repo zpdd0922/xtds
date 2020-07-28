@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'CaseInfo',
   data() {
@@ -41,9 +43,7 @@ export default {
     }
   },
   computed: {
-    isPop() {
-      return this.$store.state.isPop
-    }
+    ...mapState(['caseInfo'])
   },
   props: {
     xtdsCase: {
@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     popOut() {
-      console.log(this.isPop)
       this.$store.commit('changePop')
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class='xdts' ref='xtds'>
+  <div class='xtds'>
     <div class="xtds-top">
       <div class="xtds-top-logo"></div>
       <div class="xtds-top-head"></div>
@@ -83,25 +83,28 @@
       <div class="disclaimer">{{disclaimer}}</div>
       <div class="btn">限时免费开放体验</div>
     </div>
-    <div class="popout-wrap" v-if="isPop">
-      <div class="box">
-        <div class="explaination">
-          <h4>累计最高涨跌幅</h4>
-          <p>指下一个形态出现之前的最高涨跌幅。</p>
-          <h4>形态预期涨跌幅</h4>
-          <p>指当前形态目标价的涨跌幅。</p>
+    <transition name="xtdscasepop">
+      <div class="popout-wrap" v-if="isPop" @touchmove="touchForbidden">
+        <div class="box">
+          <div class="explaination">
+            <h4>累计最高涨跌幅</h4>
+            <p>指下一个形态出现之前的最高涨跌幅。</p>
+            <h4>形态预期涨跌幅</h4>
+            <p>指当前形态目标价的涨跌幅。</p>
+          </div>
+          <div class="known" @click='popIn'>我知道了</div>
         </div>
-        <div class="known" @click='popIn'>我知道了</div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
 <script>
-import XingtaidashiCard from '../../components/XingtaidashiCard'
-import XingtaidashiCase from '../../components/XingtaidashiCase'
-import XingtaidashiUse from '../../components/XingtaidashiUse'
+import XingtaidashiCard from '@/components/XingtaidashiCard'
+import XingtaidashiCase from '@/components/XingtaidashiCase'
+import XingtaidashiUse from '@/components/XingtaidashiUse'
 import { DATA_USE, DATA_QUESTION, DISCLAIMER } from './config'
+import { mapGetters } from 'vuex'
 
 export default {
   name: '',
@@ -113,346 +116,360 @@ export default {
     }
   },
   computed: {
-    isPop() {
-      return this.$store.state.isPop
-    }
+    ...mapGetters(['isPop'])
   },
   components: {
     XingtaidashiCard,
     XingtaidashiCase,
     XingtaidashiUse
+  },
+  methods: {
+    popIn() {
+      this.$store.commit('changePop')
+    },
+    touchForbidden(e) {
+      e.preventDefault()
+    }
   }
 }
 </script>
 
 <style scoped lang="stylus">
 @import '~assets/stylus/mixin'
-@import '~assets/stylus/variable'
 
-.xtds-top {
-  position relative
-  padding-top 25px
-  bg-image('topbg')
-
-  &-logo {
-    margin-left 25px
-    margin-bottom 30px
-    bg-image('logo')
-  }
-
-  &-head {
+  .xtds-top {
     position relative
-    margin: 0 auto 29px;
-    z-index 2
-    bg-image('head')
-  }
+    padding-top 25px
+    bg-image('topbg')
 
-  &-figure {
-    position absolute
-    bottom 12px
-    left 50%
-    transform translateX(-50%)
-    z-index 1
-    bg-image('figure')
-  }
-}
+    &-logo {
+      margin-left 25px
+      margin-bottom 30px
+      bg-image('logo')
+    }
 
-.xtds-body {
-  &-info {
     &-head {
       position relative
-      top -10px
-      margin 0 auto 5px
-      bg-image('xtdsinfo')
+      margin: 0 auto 29px;
+      z-index 2
+      bg-image('head')
     }
 
-    &-content-wrap {
-      position relative
-      width 607px
-      height 228px
-      margin-left 51px
-      padding-bottom 70px
-
-      .content {
-        position relative
-        vertical-align text-top
-        font-size 26px
-        line-height 48px
-        letter-spacing 0px
-        color #333333
-        z-index 2
-      }
-
-      .front-quote {
-        position absolute
-        top -21px
-        left -21px
-        bg-image('frontquote')
-        z-index 1
-      }
-
-      .back-quote {
-        position absolute
-        top 207px
-        left 354px
-        bg-image('backquote')
-        z-index 1
-      }
+    &-figure {
+      position absolute
+      bottom 12px
+      left 50%
+      transform translateX(-50%)
+      z-index 1
+      bg-image('figure')
     }
   }
 
-  &-adv {
-    &-head {
-      position relative
-      top -10px
-      margin 0 auto 63px
-      bg-image('xtdsadv')
-    }
-
-    &-content-wrap {
-      margin 0 80px
-      clearfix()
-
-      & h3 {
-        font-size: 34px;
-        line-height: 30px;
-        letter-spacing: 0px;
-        font-weight bold
-        margin-bottom 20px
-      }
-
-      & p {
-        font-size 26px
-        line-height 42px
-        letter-spacing 0px
-        color #666666
-      }
-
-      .content1 {
+  .xtds-body {
+    &-info {
+      &-head {
         position relative
-        margin-bottom 121px
-        &-sup {
-          position absolute
-          left 102px
-          top -30px
-          bg-image('01')
-        }
-        &-figure {
-          position absolute
-          top -45px
-          right 0
-          bg-image('advfigure1')
-        }
+        top -10px
+        margin 0 auto 5px
+        bg-image('xtdsinfo')
       }
-      .content2 {
+
+      &-content-wrap {
         position relative
-        margin-right -16px
-        margin-bottom 119px
-        padding-left 294px
-        &-sup {
-          position absolute
-          left 396px
-          top -30px
-          bg-image('02')
+        width 607px
+        height 228px
+        margin-left 51px
+        padding-bottom 70px
+
+        .content {
+          position relative
+          vertical-align text-top
+          font-size 26px
+          line-height 48px
+          letter-spacing 0px
+          color #333333
+          z-index 2
         }
-        &-figure {
+
+        .front-quote {
           position absolute
-          left 0px
-          bottom -18px
-          bg-image('advfigure2')
+          top -21px
+          left -21px
+          bg-image('frontquote')
+          z-index 1
+        }
+
+        .back-quote {
+          position absolute
+          top 207px
+          left 354px
+          bg-image('backquote')
+          z-index 1
         }
       }
-      .content3 {
+    }
+
+    &-adv {
+      &-head {
         position relative
-        margin-bottom 78px
-        &-sup {
-          position absolute
-          left 102px
-          top -30px
-          bg-image('03')
-        }
-        &-figure {
-          position absolute
-          right 0
-          bottom -18px
-          bg-image('advfigure3')
-        }
-      }
-    }
-  }
-
-  &-case {
-    &-head {
-      margin 0 auto 38px
-      bg-image('xtdscase')
-    }
-  }
-
-  &-use {
-    &-head {
-      position relative
-      top -10px
-      margin 0 auto 7px
-      bg-image('xtdsuse')
-    }
-
-    &-content {
-      .xtdsentry1 {
-        bg-image('xtdsentry1')
-      }
-      .xtdsentry2 {
-        bg-image('xtdsentry2')
-      }
-      .xtdshome1 {
-        bg-image('xtdshome1')
-      }
-      .xtdshome2 {
-        bg-image('xtdshome2')
-      }
-      .xtdsintro1 {
-        bg-image('xtdsintroduction1')
-      }
-      .xtdsintro2 {
-        bg-image('xtdsintroduction2')
-      }
-      .xtdstips-figure {
-        bg-image('tips')
+        top -10px
+        margin 0 auto 63px
+        bg-image('xtdsadv')
       }
 
-      & .tips {
-        position relative
-        width 47px
-        margin 0 0 17px 38px
-        padding 9px 10px 9px 10px
-        background-color #f1f1f1
-        font-size 24px
-        line-height 24px
-        color #666666
-        border-radius 5px
+      &-content-wrap {
+        margin 0 80px
+        clearfix()
 
-        &:after {
-          position absolute
-          right -20px
-          bottom 10 px
-          content ''
-          display block
-          triangle(10px, #f1f1f1, right )
-        }
-      }
-    }
-  }
-
-  &-question {
-    &-head {
-      position relative
-      top -9px
-      margin 0 auto 5px
-      bg-image('xtdsquestion')
-    }
-
-    &-content {
-      & h3{
-        font-size: 32px;
-        line-height: 42px;
-        letter-spacing: 0px;
-        font-weight bold
-        color: #333333;
-        margin-bottom 15px
-      }
-      & p {
-        font-size: 26px;
-        line-height: 42px;
-        letter-spacing: 0px;
-        color: #666666;
-      }
-
-      & .question-wrap{
-        position relative
-        width 546px
-        margin 0 0 48px 106px
-
-        & .number {
-          position absolute
-          left -64px
-          padding 5px
-          background-color #4c67eb
-          font-size 30px
-          line-height 30px
+        & h3 {
+          font-size: 34px;
+          line-height: 30px;
+          letter-spacing: 0px;
           font-weight bold
-          color #ffffff
-          &:after {
+          margin-bottom 20px
+        }
+
+        & p {
+          font-size 26px
+          line-height 42px
+          letter-spacing 0px
+          color #666666
+        }
+
+        .content1 {
+          position relative
+          margin-bottom 121px
+          &-sup {
             position absolute
-            left  0
-            bottom -9px
-            content ''
-            display block
-            triangle(10px, #4c67eb, right)
+            left 102px
+            top -30px
+            bg-image('01')
+          }
+          &-figure {
+            position absolute
+            top -45px
+            right 0
+            bg-image('advfigure1')
+          }
+        }
+        .content2 {
+          position relative
+          margin-right -16px
+          margin-bottom 119px
+          padding-left 294px
+          &-sup {
+            position absolute
+            left 396px
+            top -30px
+            bg-image('02')
+          }
+          &-figure {
+            position absolute
+            left 0px
+            bottom -18px
+            bg-image('advfigure2')
+          }
+        }
+        .content3 {
+          position relative
+          margin-bottom 78px
+          &-sup {
+            position absolute
+            left 102px
+            top -30px
+            bg-image('03')
+          }
+          &-figure {
+            position absolute
+            right 0
+            bottom -18px
+            bg-image('advfigure3')
           }
         }
       }
     }
+
+    &-case {
+      &-head {
+        margin 0 auto 38px
+        bg-image('xtdscase')
+      }
+    }
+
+    &-use {
+      &-head {
+        position relative
+        top -10px
+        margin 0 auto 7px
+        bg-image('xtdsuse')
+      }
+
+      &-content {
+        .xtdsentry1 {
+          bg-image('xtdsentry1')
+        }
+        .xtdsentry2 {
+          bg-image('xtdsentry2')
+        }
+        .xtdshome1 {
+          bg-image('xtdshome1')
+        }
+        .xtdshome2 {
+          bg-image('xtdshome2')
+        }
+        .xtdsintro1 {
+          bg-image('xtdsintroduction1')
+        }
+        .xtdsintro2 {
+          bg-image('xtdsintroduction2')
+        }
+        .xtdstips-figure {
+          bg-image('tips')
+        }
+
+        & .tips {
+          position relative
+          width 47px
+          margin 0 0 17px 38px
+          padding 9px 10px 9px 10px
+          background-color #f1f1f1
+          font-size 24px
+          line-height 24px
+          color #666666
+          border-radius 5px
+
+          &:after {
+            position absolute
+            right -20px
+            bottom 10 px
+            content ''
+            display block
+            triangle(10px, #f1f1f1, right )
+          }
+        }
+      }
+    }
+
+    &-question {
+      &-head {
+        position relative
+        top -9px
+        margin 0 auto 5px
+        bg-image('xtdsquestion')
+      }
+
+      &-content {
+        & h3{
+          font-size: 32px;
+          line-height: 42px;
+          letter-spacing: 0px;
+          font-weight bold
+          color: #333333;
+          margin-bottom 15px
+        }
+        & p {
+          font-size: 26px;
+          line-height: 42px;
+          letter-spacing: 0px;
+          color: #666666;
+        }
+
+        & .question-wrap{
+          position relative
+          width 546px
+          margin 0 0 48px 106px
+
+          & .number {
+            position absolute
+            left -64px
+            padding 5px
+            background-color #4c67eb
+            font-size 30px
+            line-height 30px
+            font-weight bold
+            color #ffffff
+            &:after {
+              position absolute
+              left  0
+              bottom -9px
+              content ''
+              display block
+              triangle(10px, #4c67eb, right)
+            }
+          }
+        }
+      }
+    }
+
+    & .disclaimer {
+      margin -26px 42px 40px
+      font-size: 22px;
+      line-height: 36px;
+      letter-spacing: 0px;
+      color: #afafaf;
+    }
+
+    & .btn {
+      width 100vw
+      height 100px
+      background: linear-gradient(-79deg, #f3c946 0%, #ffe155 100%), linear-gradient(#ffffff, #ffffff);
+      font-size 34px
+      font-weight bold
+      line-height 100px
+      text-align center
+      letter-spacing 0px
+      color #925c0e
+    }
   }
 
-  & .disclaimer {
-    margin -26px 42px 40px
-    font-size: 22px;
-    line-height: 36px;
-    letter-spacing: 0px;
-    color: #afafaf;
-  }
-
-  & .btn {
+  .xtds
+    position relative
     width 100vw
-    height 100px
-    background: linear-gradient(-79deg, #f3c946 0%, #ffe155 100%), linear-gradient(#ffffff, #ffffff);
-    font-size 34px
-    font-weight bold
-    line-height 100px
-    text-align center
-    letter-spacing 0px
-    color #925c0e
-  }
-}
+    height 100vh
 
-.xtds
-  & .popout-wrap
-    position fixed
-    left 0
-    top 0
-    bottom 0
-    right 0
-    background-color rgba(0,0,0,0.5)
-    z-index 1000
+    & .xtdscasepop-enter-active, .xtdscasepop-leave-active
+      transition opacity .3s
+    & .xtdscasepop-enter, .xtdscasepop-leave-to
+      opacity 0
 
-    & .box
+    & .popout-wrap
       position fixed
-      left 50%
-      top 50%
-      width 620px
-      height 403px
-      transform translate(-50%, -50%)
-      border-radius 10px
-      overflow hidden
+      left 0
+      top 0
+      bottom 0
+      right 0
+      background-color rgba(0,0,0,0.7)
+      z-index 1000
 
-      & .explaination
-        padding 49px 49px 9px 49px
-        background-color #fff
-        & h4
-          font-size 30px
-          line-hight 30px
-          color #333
-        & p
-          margin 19px 0px 49px 0px
-          font-size 26px
-          line-height 26px
-          color #666
+      & .box
+        position absolute
+        left 50%
+        top 50%
+        width 620px
+        height 403px
+        transform translate(-50%, -50%)
+        border-radius 10px
+        overflow hidden
 
-      & .known
-        height 100px
-        font-size 32px
-        line-height 100px
-        text-align center
-        color #fff
-        letter-spacing 2px
-        background-color #3e5ffd
+        & .explaination
+          padding 49px 49px 9px 49px
+          background-color #fff
+          & h4
+            font-size 30px
+            line-hight 30px
+            color #333
+          & p
+            margin 19px 0px 49px 0px
+            font-size 26px
+            line-height 26px
+            color #666
+
+        & .known
+          height 100px
+          font-size 32px
+          line-height 100px
+          text-align center
+          color #fff
+          letter-spacing 2px
+          background-color #3e5ffd
 </style>

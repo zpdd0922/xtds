@@ -96,7 +96,7 @@ export default {
           content: ''
           position absolute
           bottom 0
-          left -23px
+          left -24px
           border-style solid
           border-width 69px 26px
           border-color transparent transparent #f3c946 transparent

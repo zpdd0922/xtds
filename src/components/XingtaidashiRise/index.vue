@@ -1,7 +1,7 @@
 <template>
   <div class="xtds-case-rise">
     <div class="xtds-case-rise-wrap">
-      <cube-slide :auto-play="false" :loop="false" ref="slide">
+      <cube-slide :auto-play="false" :loop="false" ref="slide" :allow-vertical="true">
         <cube-slide-item>
           <case-info class="case-swipe" :xtdsCase="this.caseData.tencentData" slot="default">
             <div class="tencentPic" slot="pic"></div>
@@ -38,11 +38,6 @@ export default {
   },
   components: {
     CaseInfo
-  },
-  watch: {},
-  mounted() {},
-  methods: {
-
   }
 }
 </script>
