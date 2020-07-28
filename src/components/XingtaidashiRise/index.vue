@@ -57,6 +57,17 @@ export default {
 
     &-wrap
       width 100%
+      // 修改小圆点样式
+      &/deep/.cube-slide-dots
+        bottom 13px
+        & .my-dot
+          height 10px
+          border-radius 50%
+          margin 0px 5px
+          background-color #d7d7d7
+        
+        & .active
+          background-color #4c67eb
 
       & .case-swipe
         width 620px
@@ -68,6 +79,4 @@ export default {
     & .xiaomiPic
       bg-image('xiaomi')
 
-    & .cube-slide-dots
-      bottom 15px !important
 </style>

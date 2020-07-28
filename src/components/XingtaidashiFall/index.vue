@@ -17,6 +17,9 @@
             <div class="longguangPic" slot="pic"></div>
           </case-info>
         </cube-slide-item>
+        <template slot="dots" slot-scope="props">
+          <span class="my-dot" :class="{ active: props.current === index}" v-for="(item, index) in props.dots" :key="index">{{index + 1}}</span>
+        </template>
       </cube-slide>
     </div>
   </div>
@@ -54,6 +57,16 @@ export default {
 
     &-wrap
       width 100%
+
+      &/deep/.cube-slide-dots
+        bottom 13px
+        & .my-dot
+          height 10px
+          border-radius 50%
+          margin 0px 5px
+          background-color #d7d7d7
+        & .active
+          background-color #4c67eb
 
       & .case-swipe
         width 620px
