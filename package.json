@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "cube-ui": "^1.12.6",
     "decimal.js": "^10.0.2",
     "fastclick": "^1.0.6",
